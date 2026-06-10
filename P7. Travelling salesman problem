@@ -1,0 +1,35 @@
+
+% distances
+dist(a,b,10).
+dist(a,c,15).
+dist(a,d,20).
+dist(b,c,35).
+dist(b,d,25).
+dist(c,d,30).
+
+% symmetric distances
+dist(b,a,10).
+dist(c,a,15).
+dist(d,a,20).
+dist(c,b,35).
+dist(d,b,25).
+dist(d,c,30).
+
+% TSP (simple path + cost)
+
+tsp([Start|Cities], Path, Cost) :-
+    append([Start|Cities], [Start], Path),
+    calc_cost(Path, Cost).
+
+% calculate total cost
+calc_cost([_], 0).
+
+calc_cost([A,B|T], Cost) :-
+    dist(A,B,C1),
+    calc_cost([B|T], C2),
+    Cost is C1 + C2.
+
+
+
+% Query  
+?- tsp([a,b,c,d], Path, Cost).
