@@ -1,0 +1,24 @@
+
+% Winning positions
+win([P,P,P,_,_,_,_,_,_]).
+win([_,_,_,P,P,P,_,_,_]).
+win([_,_,_,_,_,_,P,P,P]).
+win([P,_,_,P,_,_,P,_,_]).
+win([_,P,_,_,P,_,_,P,_]).
+win([_,_,P,_,_,P,_,_,P]).
+win([P,_,_,_,P,_,_,_,P]).
+win([_,_,P,_,P,_,P,_,_]).
+
+% Minimax (very simple idea)
+
+minimax(Board, x, 1) :-
+    win(Board), !.
+
+minimax(Board, o, -1) :-
+    win(Board), !.
+
+minimax(Board, _, 0).
+
+
+% Query 
+?- minimax([x,x,x,o,5,6,o,8,9], x, Score).
