@@ -1,0 +1,22 @@
+% Graph
+
+edge(a,b).
+edge(a,c).
+edge(b,d).
+edge(b,e).
+edge(c,f).
+edge(e,g).
+
+% BFS
+
+bfs([Goal|_], Goal) :-
+    write('Found: '), write(Goal).
+
+bfs([Current|Rest], Goal) :-
+    findall(X, edge(Current,X), Children),
+    append(Rest, Children, Queue),
+    bfs(Queue, Goal).
+
+
+    % Query 
+    ?- bfs([a], g).
