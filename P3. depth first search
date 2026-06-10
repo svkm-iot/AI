@@ -4,19 +4,23 @@ edge(a,b).
 edge(a,c).
 edge(b,d).
 edge(b,e).
-edge(c,f).
+edge(c,g).
 edge(e,g).
+
+% Goal state
+
+goal(g).
 
 % DFS
 
-dfs(Goal, Goal) :-
-    write(Goal).
+solve(Node, [Node]) :-
+    goal(Node).
 
-dfs(Start, Goal) :-
-    write(Start), write(' -> '),
-    edge(Start, Next),
-    dfs(Next, Goal).
+solve(Node, [Node|Path]) :-
+    edge(Node, Next),
+    solve(Next, Path).
+
 
 % Query 
 
-?- dfs(a,g).
+?- solve(a, Solution).
