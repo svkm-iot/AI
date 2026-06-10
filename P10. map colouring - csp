@@ -1,0 +1,28 @@
+
+% Colors
+color(red).
+color(green).
+color(blue).
+
+% Adjacent regions (graph)
+adj(a,b).
+adj(a,c).
+adj(b,c).
+adj(b,d).
+adj(c,d).
+
+% Map coloring solution
+color_map(A,B,C,D) :-
+    color(A),
+    color(B),
+    color(C),
+    color(D),
+
+    A \= B,
+    A \= C,
+    B \= C,
+    B \= D,
+    C \= D.
+
+% Query 
+?- color_map(A, B, C, D).
