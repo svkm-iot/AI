@@ -1,0 +1,40 @@
+
+% Alpha-Beta pruning start
+alphabeta(Node, Alpha, Beta, Value) :-
+    move(Node, Next),
+    alphabeta(Next, Alpha, Beta, Value).
+
+% If terminal node (leaf)
+alphabeta(Node, _, _, Value) :-
+    terminal(Node, Value).
+
+% MAX player
+max(Node, Alpha, Beta, Value) :-
+    findall(V,
+        (move(Node, Next),
+         alphabeta(Next, Alpha, Beta, V)),
+        Values),
+    max_list(Values, Value).
+
+% MIN player
+min(Node, Alpha, Beta, Value) :-
+    findall(V,
+        (move(Node, Next),
+         alphabeta(Next, Alpha, Beta, V)),
+        Values),
+    min_list(Values, Value).
+
+% Example terminal values (game tree leaves)
+terminal(a, 3).
+terminal(b, 5).
+terminal(c, 2).
+terminal(d, 9).
+
+% Example moves
+move(root, a).
+move(root, b).
+move(root, c).
+move(root, d).
+
+% Query
+?- alphabeta(root, -1000, 1000, Value).
